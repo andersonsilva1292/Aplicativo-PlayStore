@@ -1,0 +1,10 @@
+{
+  "web_apps": [
+    {
+      "manifest": "https://andersonacademy-439305375626.us-west1.run.app/manifest.json"
+    },
+    {
+      "manifest": "https://estudosimuladorctfl.lovable.app/manifest.json"
+    }
+  ]
+}
