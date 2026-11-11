@@ -35,3 +35,7 @@ android/app/*.iml
 # Lockfiles
 bun.lock
 bun.lockb
+-e 
+# Archives
+public/aplicativo-playstore.zip
+public/aplicativo-playstore.tar.gz
