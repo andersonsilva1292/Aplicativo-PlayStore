@@ -12,14 +12,28 @@ RUN npm run build
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 
-RUN printf "server {\n\
+RUN printf 'server {\n\
     listen 3000;\n\
-    location / {\n\
-        root /usr/share/nginx/html;\n\
-        index index.html index.htm;\n\
-        try_files \$uri \$uri/ /index.html;\n\
+    root /usr/share/nginx/html;\n\
+    index index.html;\n\
+    \n\
+    include /etc/nginx/mime.types;\n\
+    types {\n\
+        application/manifest+json webmanifest;\n\
+        application/json json;\n\
     }\n\
-}\n" > /etc/nginx/conf.d/default.conf
+    \n\
+    location /sw.js {\n\
+        add_header Cache-Control "no-cache, no-store, must-revalidate";\n\
+        add_header Pragma "no-cache";\n\
+        add_header Expires "0";\n\
+        try_files $uri =404;\n\
+    }\n\
+    \n\
+    location / {\n\
+        try_files $uri $uri/ /index.html;\n\
+    }\n\
+}\n' > /etc/nginx/conf.d/default.conf
 
 EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]

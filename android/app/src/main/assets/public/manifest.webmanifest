@@ -7,13 +7,25 @@
   "scope": "/",
   "display": "standalone",
   "display_override": [
+    "tabbed",
     "window-controls-overlay",
     "standalone",
     "minimal-ui",
-    "tabbed",
     "browser"
   ],
-  "orientation": "portrait-primary",
+  "tab_strip": {
+    "home_tab": {
+      "scope_patterns": [
+        {
+          "pathname": "/*"
+        }
+      ]
+    },
+    "new_tab_button": {
+      "url": "/simulados"
+    }
+  },
+  "orientation": "portrait",
   "background_color": "#0B1220",
   "theme_color": "#0B1220",
   "lang": "pt-BR",
@@ -32,6 +44,9 @@
     }
   ],
   "scope_extensions": [
+    {
+      "origin": "https://andersonacademy-439305375626.us-west1.run.app"
+    },
     {
       "origin": "https://estudosimuladorctfl.lovable.app"
     }
@@ -128,14 +143,14 @@
   "screenshots": [
     {
       "src": "/screenshots/desktop.jpg",
-      "sizes": "1280x720",
+      "sizes": "1920x1080",
       "type": "image/jpeg",
       "form_factor": "wide",
       "label": "Painel de Estudos e Módulos CTFL"
     },
     {
       "src": "/screenshots/mobile.jpg",
-      "sizes": "720x1280",
+      "sizes": "1080x1920",
       "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Simulador Interativo no Celular"
@@ -153,7 +168,7 @@
       "screenshots": [
         {
           "src": "/screenshots/mobile.jpg",
-          "sizes": "720x1280",
+          "sizes": "1080x1920",
           "label": "Widget de Estudos"
         }
       ]

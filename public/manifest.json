@@ -25,7 +25,7 @@
       "url": "/simulados"
     }
   },
-  "orientation": "portrait-primary",
+  "orientation": "portrait",
   "background_color": "#0B1220",
   "theme_color": "#0B1220",
   "lang": "pt-BR",
@@ -143,14 +143,14 @@
   "screenshots": [
     {
       "src": "/screenshots/desktop.jpg",
-      "sizes": "1376x768",
+      "sizes": "1920x1080",
       "type": "image/jpeg",
       "form_factor": "wide",
       "label": "Painel de Estudos e Módulos CTFL"
     },
     {
       "src": "/screenshots/mobile.jpg",
-      "sizes": "768x1376",
+      "sizes": "1080x1920",
       "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Simulador Interativo no Celular"
@@ -168,7 +168,7 @@
       "screenshots": [
         {
           "src": "/screenshots/mobile.jpg",
-          "sizes": "768x1376",
+          "sizes": "1080x1920",
           "label": "Widget de Estudos"
         }
       ]
