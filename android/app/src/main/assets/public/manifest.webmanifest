@@ -45,9 +45,15 @@
   ],
   "scope_extensions": [
     {
-      "origin": "https://andersonacademy-439305375626.us-west1.run.app"
+      "type": "origin",
+      "origin": "https://*.run.app"
     },
     {
+      "type": "origin",
+      "origin": "https://*.lovable.app"
+    },
+    {
+      "type": "origin",
       "origin": "https://estudosimuladorctfl.lovable.app"
     }
   ],
