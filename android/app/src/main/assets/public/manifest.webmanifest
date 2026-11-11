@@ -46,15 +46,15 @@
   "scope_extensions": [
     {
       "type": "origin",
-      "origin": "https://*.run.app"
-    },
-    {
-      "type": "origin",
-      "origin": "https://*.lovable.app"
-    },
-    {
-      "type": "origin",
       "origin": "https://estudosimuladorctfl.lovable.app"
+    },
+    {
+      "type": "origin",
+      "origin": "https://andersonacademy-439305375626.us-west1.run.app"
+    },
+    {
+      "type": "origin",
+      "origin": "https://andersonacademy.ai.studio"
     }
   ],
   "launch_handler": {
@@ -122,28 +122,28 @@
       "short_name": "Simulados",
       "description": "Pratique com simulados preparatórios CTFL",
       "url": "/simulados",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "Laboratório Java",
       "short_name": "Lab Java",
       "description": "Exercícios práticos de automação e código Java",
       "url": "/laboratorio-java",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "Trilhas de Estudo",
       "short_name": "Trilhas",
       "description": "Acesse os módulos da certificação",
       "url": "/trilhas",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "Banco de Questões",
       "short_name": "Questões",
       "description": "Pesquise questões e resoluções comentadas",
       "url": "/banco-questoes",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     }
   ],
   "screenshots": [
@@ -175,6 +175,7 @@
         {
           "src": "/screenshots/mobile.jpg",
           "sizes": "1080x1920",
+          "type": "image/jpeg",
           "label": "Widget de Estudos"
         }
       ]
