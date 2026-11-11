@@ -1,0 +1,211 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile document storing basic identity and metadata",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique user ID matching auth.uid",
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "description": "User primary email address",
+          "maxLength": 256
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User public display name",
+          "maxLength": 128
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "User avatar image URL",
+          "maxLength": 1024
+        },
+        "role": {
+          "type": "string",
+          "description": "User permission role",
+          "enum": ["student", "admin"],
+          "maxLength": 32
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO timestamp when the user registered"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO timestamp when the profile was last modified"
+        }
+      },
+      "required": ["id", "email", "createdAt", "updatedAt"]
+    },
+    "UserProgress": {
+      "title": "UserProgress",
+      "description": "Tracks student lesson progress, quiz scores, and lab code submissions",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User ID of the progress owner",
+          "maxLength": 128
+        },
+        "lessonId": {
+          "type": "string",
+          "description": "Unique lesson or module identifier",
+          "maxLength": 128
+        },
+        "video_completed": {
+          "type": "boolean",
+          "description": "Whether the lesson video or lecture was completed"
+        },
+        "quiz_score": {
+          "type": "number",
+          "description": "Highest score achieved in the module quiz"
+        },
+        "quiz_attempts": {
+          "type": "number",
+          "description": "Total number of quiz attempts"
+        },
+        "exam_score": {
+          "type": "number",
+          "description": "Score achieved in the module final exam"
+        },
+        "exam_attempts": {
+          "type": "number",
+          "description": "Total number of final exam attempts"
+        },
+        "code_submitted": {
+          "type": "string",
+          "description": "Submitted code for evaluated exercise",
+          "maxLength": 16384
+        },
+        "code_draft": {
+          "type": "string",
+          "description": "Draft code auto-saved in sandbox",
+          "maxLength": 16384
+        },
+        "pdf_opened_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when support material was opened"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last progress update"
+        }
+      },
+      "required": ["userId", "lessonId", "updatedAt"]
+    },
+    "SimuladoResult": {
+      "title": "SimuladoResult",
+      "description": "Record of a completed CTFL practice exam simulation",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique result identifier",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "User ID of the student who completed the exam",
+          "maxLength": 128
+        },
+        "score": {
+          "type": "number",
+          "description": "Number of correct answers"
+        },
+        "totalQuestions": {
+          "type": "number",
+          "description": "Total questions in the exam"
+        },
+        "percentage": {
+          "type": "number",
+          "description": "Percentage score (0 to 100)"
+        },
+        "passed": {
+          "type": "boolean",
+          "description": "Whether the student achieved the passing grade (>= 65%)"
+        },
+        "timeSpentSeconds": {
+          "type": "number",
+          "description": "Total duration spent on the exam in seconds"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the exam was finished"
+        }
+      },
+      "required": ["id", "userId", "score", "totalQuestions", "percentage", "passed", "completedAt"]
+    },
+    "PracticeResult": {
+      "title": "PracticeResult",
+      "description": "Record of speed typing or code snippet practice session",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique practice record ID",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "User ID who performed the practice session",
+          "maxLength": 128
+        },
+        "wpm": {
+          "type": "number",
+          "description": "Words per minute speed recorded"
+        },
+        "accuracy": {
+          "type": "number",
+          "description": "Typing accuracy percentage"
+        },
+        "exerciseId": {
+          "type": "string",
+          "description": "Identifier of the typing practice exercise",
+          "maxLength": 128
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when practice was concluded"
+        }
+      },
+      "required": ["id", "userId", "wpm", "accuracy", "exerciseId", "completedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "User account and profile information"
+    },
+    "/users/{userId}/progress/{lessonId}": {
+      "schema": {
+        "$ref": "#/entities/UserProgress"
+      },
+      "description": "User progress per course lesson and module"
+    },
+    "/users/{userId}/simulados/{simuladoId}": {
+      "schema": {
+        "$ref": "#/entities/SimuladoResult"
+      },
+      "description": "Exam and simulation history for the user"
+    },
+    "/users/{userId}/practice/{practiceId}": {
+      "schema": {
+        "$ref": "#/entities/PracticeResult"
+      },
+      "description": "Typing and lab practice statistics"
+    }
+  }
+}

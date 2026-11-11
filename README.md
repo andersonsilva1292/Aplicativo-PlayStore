@@ -1,11 +1,26 @@
-<div align="center">
+# 📘 Simulador de Estudos e Certificações
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+## 🎯 Objetivo
+Facilitar o aprendizado com prática guiada, simulados e interações em linguagem natural.
 
-  <h1>Built with AI Studio</h2>
+## 🧩 Funcionalidades
+- Painel de progresso 📊
+- Chat IA 💬
+- Simulados cronometrados ⏱️
+- Trilhas de estudo 🛣️
+- Relatórios detalhados 📈
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## 👥 Público-Alvo
+- Estudantes iniciantes
+- Profissionais buscando certificação
+- Usuários com baixa familiaridade digital
+- Pessoas com necessidades de acessibilidade ♿
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## 🚀 MVP
+- Telas principais: Chat, Trilhas, Simulados, Relatórios
+- Recursos: NLP, correção automática, feedback inteligente
+- Validação: testes com usuários reais
 
-</div>
+---
+
+**Desenvolvido por Anderson dos Santos Silva**

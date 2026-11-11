@@ -1,0 +1,162 @@
+{
+  "id": "/?source=pwa",
+  "name": "Anderson Academy — Simulador CTFL & Automação",
+  "short_name": "Anderson QA",
+  "description": "Plataforma de estudos para certificação em QA/QC: simulados ISTQB CTFL, trilhas interativas e curso de automação de testes com Selenium e Java.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui",
+    "tabbed",
+    "browser"
+  ],
+  "orientation": "portrait-primary",
+  "background_color": "#0B1220",
+  "theme_color": "#0B1220",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "com.andersonacademy.ctfl",
+      "url": "https://play.google.com/store/apps/details?id=com.andersonacademy.ctfl"
+    }
+  ],
+  "scope_extensions": [
+    {
+      "origin": "https://estudosimuladorctfl.lovable.app"
+    }
+  ],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "edge_side_panel": {
+    "preferred_width": 420
+  },
+  "note_taking": {
+    "new_note_url": "/chat"
+  },
+  "share_target": {
+    "action": "/chat",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+anderson",
+      "url": "/?study=%s"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/laboratorio-java",
+      "name": "Arquivos de Teste e Código Java",
+      "accept": {
+        "text/plain": [".java", ".txt", ".json"]
+      }
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Simulados CTFL",
+      "short_name": "Simulados",
+      "description": "Pratique com simulados preparatórios CTFL",
+      "url": "/simulados",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Laboratório Java",
+      "short_name": "Lab Java",
+      "description": "Exercícios práticos de automação e código Java",
+      "url": "/laboratorio-java",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Trilhas de Estudo",
+      "short_name": "Trilhas",
+      "description": "Acesse os módulos da certificação",
+      "url": "/trilhas",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Banco de Questões",
+      "short_name": "Questões",
+      "description": "Pesquise questões e resoluções comentadas",
+      "url": "/banco-questoes",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Painel de Estudos e Módulos CTFL"
+    },
+    {
+      "src": "/screenshots/mobile.jpg",
+      "sizes": "720x1280",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Simulador Interativo no Celular"
+    }
+  ],
+  "widgets": [
+    {
+      "name": "Progresso Anderson Academy",
+      "description": "Acompanhe seu progresso nos estudos de QA e automação",
+      "tag": "study-progress",
+      "template": "study_widget",
+      "ms_ac_template": "widgets/study.json",
+      "data": "widgets/study-data.json",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "/screenshots/mobile.jpg",
+          "sizes": "720x1280",
+          "label": "Widget de Estudos"
+        }
+      ]
+    }
+  ]
+}

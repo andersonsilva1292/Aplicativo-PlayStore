@@ -1,0 +1,8 @@
+{
+  "name": "Anderson Academy - Estudos para Certificação",
+  "description": "Plataforma de estudos para certificação em QA e QC: simulados ISTQB CTFL, trilhas de estudo e automação de testes.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

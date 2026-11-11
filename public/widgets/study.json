@@ -1,0 +1,30 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Anderson Academy — Estudos CTFL",
+      "weight": "Bolder",
+      "size": "Medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${description}",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Progresso atual: ${progress}%",
+      "color": "Accent",
+      "weight": "Bolder"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Continuar Simulados",
+      "url": "https://estudosimuladorctfl.lovable.app/simulados"
+    }
+  ]
+}

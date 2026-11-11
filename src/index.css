@@ -1,0 +1,270 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/manrope-400.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/manrope-500.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/manrope-600.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("./assets/fonts/sora-600.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("./assets/fonts/sora-700.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Apple iOS (modo escuro) — cores do sistema */
+    --background: 0 0% 0%;
+    --foreground: 240 11% 96%;
+    --card: 240 3% 11%;
+    --card-foreground: 240 11% 96%;
+    --popover: 240 3% 11%;
+    --popover-foreground: 240 11% 96%;
+    --primary: 211 100% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 2% 18%;
+    --secondary-foreground: 240 11% 96%;
+    --muted: 240 3% 14%;
+    --muted-foreground: 240 2% 60%;
+    --accent: 135 64% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 3 100% 61%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 135 64% 50%;
+    --success-foreground: 0 0% 0%;
+    --warning: 36 100% 52%;
+    --warning-foreground: 0 0% 0%;
+    --border: 240 2% 22%;
+    --input: 240 2% 22%;
+    --ring: 211 100% 52%;
+    --radius: 1.1rem;
+
+    --sidebar-background: 240 3% 7%;
+    --sidebar-foreground: 240 11% 96%;
+    --sidebar-primary: 211 100% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3% 14%;
+    --sidebar-accent-foreground: 240 11% 96%;
+    --sidebar-border: 240 2% 18%;
+    --sidebar-ring: 211 100% 52%;
+
+    --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Manrope", sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Manrope", sans-serif;
+
+    --glass-bg: 240 6% 16% / 0.55;
+    --glass-edge: 0 0% 100% / 0.25;
+    --glass-blur: 28px;
+    --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --gradient-primary: linear-gradient(180deg, hsl(211 100% 60%), hsl(214 100% 48%));
+    --gradient-accent: linear-gradient(180deg, hsl(135 64% 56%), hsl(140 60% 42%));
+    --gradient-success: linear-gradient(180deg, hsl(135 64% 56%), hsl(140 60% 42%));
+    --gradient-warm: linear-gradient(180deg, hsl(36 100% 58%), hsl(25 100% 52%));
+    --shadow-card: 0 8px 32px -8px hsl(0 0% 0% / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.08);
+    --shadow-elevated: 0 24px 60px -16px hsl(0 0% 0% / 0.7), inset 0 1px 0 hsl(0 0% 100% / 0.12);
+    --shadow-glow: 0 8px 28px -6px hsl(211 100% 52% / 0.45);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  .gradient-success {
+    background: var(--gradient-success);
+  }
+  .gradient-warm {
+    background: var(--gradient-warm);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .glass {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    border: 1px solid hsl(var(--glass-edge));
+  }
+  .glass-card {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    border: 1px solid hsl(var(--glass-edge));
+    box-shadow: var(--shadow-card);
+  }
+  /* Ícone squircle no padrão iOS: camadas, brilho especular e escala elástica */
+  .ios-icon {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 28%;
+    background: linear-gradient(180deg, hsl(0 0% 100% / 0.22), hsl(0 0% 100% / 0.06));
+    border: 1px solid hsl(var(--glass-edge));
+    box-shadow: inset 0 1px 1px hsl(0 0% 100% / 0.45), 0 6px 16px -6px hsl(0 0% 0% / 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.45s var(--spring);
+  }
+  .ios-icon::after {
+    content: "";
+    position: absolute;
+    inset: 1px 12% auto;
+    height: 42%;
+    border-radius: 999px;
+    background: linear-gradient(180deg, hsl(0 0% 100% / 0.35), transparent);
+    pointer-events: none;
+  }
+  .ios-icon:hover { transform: scale(1.08); }
+  .ios-icon:active { transform: scale(0.94); }
+  .ios-icon-primary { background: var(--gradient-primary); }
+
+  /* ===== Camada moderna: cartões, textos e brilhos ===== */
+  .card-modern {
+    transition: transform 0.5s var(--spring), box-shadow 0.4s ease, border-color 0.4s ease;
+    box-shadow: var(--shadow-card);
+  }
+  .card-modern:hover {
+    transform: translateY(-2px) scale(1.005);
+    box-shadow: var(--shadow-elevated);
+    border-color: hsl(0 0% 100% / 0.32);
+  }
+  .text-gradient {
+    background: linear-gradient(100deg, hsl(240 11% 98%), hsl(211 100% 70%) 60%, hsl(260 80% 75%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .gradient-border {
+    position: relative;
+    background: hsl(var(--glass-bg));
+  }
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(140deg, hsl(0 0% 100% / 0.35), transparent 45%, hsl(211 100% 60% / 0.4));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98];
+  }
+  .aurora {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .aurora::before,
+  .aurora::after {
+    content: "";
+    position: absolute;
+    width: 42rem;
+    height: 42rem;
+    border-radius: 9999px;
+    filter: blur(140px);
+    opacity: 0.22;
+  }
+  .aurora::before {
+    background: hsl(211 100% 50%);
+    top: -14rem;
+    left: -10rem;
+    animation: aurora-drift 18s ease-in-out infinite;
+  }
+  .aurora::after {
+    background: hsl(280 70% 50%);
+    bottom: -16rem;
+    right: -12rem;
+    animation: aurora-drift 22s ease-in-out infinite reverse;
+  }
+  .grid-noise {
+    background-image: linear-gradient(hsl(0 0% 100% / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(0 0% 100% / 0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+  }
+}
+
+@keyframes aurora-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6rem, 4rem, 0) scale(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora::before,
+  .aurora::after {
+    animation: none;
+  }
+  .card-modern:hover {
+    transform: none;
+  }
+}
+
+
+@layer base {
+  /* Identidade visual por curso — trocando apenas tokens semânticos */
+  /* Trilhas compartilham o visual Apple; apenas o destaque muda */
+  .track-ctfl {
+    --accent: 135 64% 50%;
+  }
+
+  .track-automacao {
+    --accent: 190 100% 50%;
+    --accent-foreground: 0 0% 0%;
+  }
+}

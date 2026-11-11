@@ -1,0 +1,28 @@
+project_id = "cqcvtmyxpzpqwcojolds"
+
+[functions]
+  [functions.prebuild-lesson-videos]
+    verify_jwt = false
+  [functions.purge-lesson-media]
+    verify_jwt = false
+
+  [functions.generate-lesson-narration]
+    verify_jwt = false
+  [functions.generate-lesson-lecture]
+    verify_jwt = false
+
+  [functions.auth-email-hook]
+    verify_jwt = false
+  [functions.mp-config]
+    verify_jwt = false
+  [functions.mp-create-checkout]
+    verify_jwt = false
+
+  [functions.mp-cancel-subscription]
+    verify_jwt = false
+  [functions.mp-sync-payment]
+    verify_jwt = false
+  [functions.mp-webhook]
+    verify_jwt = false
+  [functions.mp-refund-payment]
+    verify_jwt = false

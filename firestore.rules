@@ -1,0 +1,145 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Primitive Helpers
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        (request.auth.token.email == "andersonsantosilva1292@gmail.com" && request.auth.token.email_verified == true) ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // Entity Validators
+    function isValidUser(data) {
+      return data.keys().hasAll(['id', 'email', 'createdAt', 'updatedAt']) &&
+        data.keys().hasOnly(['id', 'email', 'displayName', 'photoURL', 'role', 'createdAt', 'updatedAt']) &&
+        data.id is string && data.id == request.auth.uid &&
+        data.email is string && data.email.size() <= 256 &&
+        (!('displayName' in data) || (data.displayName is string && data.displayName.size() <= 128)) &&
+        (!('photoURL' in data) || (data.photoURL is string && data.photoURL.size() <= 1024)) &&
+        (!('role' in data) || data.role in ['student', 'admin']) &&
+        data.createdAt is string &&
+        data.updatedAt is string;
+    }
+
+    function isValidProgress(data) {
+      return data.keys().hasAll(['userId', 'lessonId', 'updatedAt']) &&
+        data.keys().hasOnly(['userId', 'lessonId', 'video_completed', 'quiz_score', 'quiz_attempts', 'exam_score', 'exam_attempts', 'code_submitted', 'code_draft', 'pdf_opened_at', 'updatedAt']) &&
+        data.userId is string && data.userId == request.auth.uid &&
+        data.lessonId is string && data.lessonId.size() <= 128 &&
+        (!('video_completed' in data) || data.video_completed is bool) &&
+        (!('quiz_score' in data) || (data.quiz_score is number && data.quiz_score >= 0 && data.quiz_score <= 100)) &&
+        (!('quiz_attempts' in data) || (data.quiz_attempts is number && data.quiz_attempts >= 0)) &&
+        (!('exam_score' in data) || (data.exam_score is number && data.exam_score >= 0 && data.exam_score <= 100)) &&
+        (!('exam_attempts' in data) || (data.exam_attempts is number && data.exam_attempts >= 0)) &&
+        (!('code_submitted' in data) || (data.code_submitted is string && data.code_submitted.size() <= 16384)) &&
+        (!('code_draft' in data) || (data.code_draft is string && data.code_draft.size() <= 16384)) &&
+        (!('pdf_opened_at' in data) || data.pdf_opened_at is string) &&
+        data.updatedAt is string;
+    }
+
+    function isValidSimulado(data) {
+      return data.keys().hasAll(['id', 'userId', 'score', 'totalQuestions', 'percentage', 'passed', 'completedAt']) &&
+        data.keys().hasOnly(['id', 'userId', 'score', 'totalQuestions', 'percentage', 'passed', 'timeSpentSeconds', 'completedAt']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.userId is string && data.userId == request.auth.uid &&
+        data.score is number && data.score >= 0 &&
+        data.totalQuestions is number && data.totalQuestions > 0 &&
+        data.percentage is number && data.percentage >= 0 && data.percentage <= 100 &&
+        data.passed is bool &&
+        (!('timeSpentSeconds' in data) || (data.timeSpentSeconds is number && data.timeSpentSeconds >= 0)) &&
+        data.completedAt is string;
+    }
+
+    function isValidPractice(data) {
+      return data.keys().hasAll(['id', 'userId', 'wpm', 'accuracy', 'exerciseId', 'completedAt']) &&
+        data.keys().hasOnly(['id', 'userId', 'wpm', 'accuracy', 'exerciseId', 'completedAt']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.userId is string && data.userId == request.auth.uid &&
+        data.wpm is number && data.wpm >= 0 &&
+        data.accuracy is number && data.accuracy >= 0 && data.accuracy <= 100 &&
+        data.exerciseId is string && data.exerciseId.size() <= 128 &&
+        data.completedAt is string;
+    }
+
+    // Health check collection
+    match /test/connection {
+      allow get: if true;
+    }
+
+    // Admin configuration records
+    match /admins/{adminId} {
+      allow read: if isAdmin();
+      allow write: if false; // Managed via console/server only
+    }
+
+    // User Profile and nested Subcollections
+    match /users/{userId} {
+      allow get: if isOwner(userId) || isAdmin();
+      allow list: if isAdmin();
+      allow create: if isOwner(userId) && isValidUser(incoming());
+      allow update: if isOwner(userId) && isValidUser(incoming()) &&
+        incoming().id == existing().id &&
+        incoming().createdAt == existing().createdAt &&
+        incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'photoURL', 'updatedAt']);
+      allow delete: if isAdmin() || isOwner(userId);
+
+      // Lesson Progress subcollection
+      match /progress/{lessonId} {
+        allow get, list: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId) && isValidId(lessonId) && isValidProgress(incoming());
+        allow update: if isOwner(userId) && isValidId(lessonId) && isValidProgress(incoming()) &&
+          incoming().userId == existing().userId &&
+          incoming().lessonId == existing().lessonId &&
+          incoming().diff(existing()).affectedKeys().hasOnly([
+            'video_completed', 'quiz_score', 'quiz_attempts',
+            'exam_score', 'exam_attempts', 'code_submitted',
+            'code_draft', 'pdf_opened_at', 'updatedAt'
+          ]);
+        allow delete: if isOwner(userId) || isAdmin();
+      }
+
+      // Simulado Results subcollection (Immutable records)
+      match /simulados/{simuladoId} {
+        allow get, list: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId) && isValidId(simuladoId) && isValidSimulado(incoming());
+        allow update: if false; // Historical records cannot be modified
+        allow delete: if isOwner(userId) || isAdmin();
+      }
+
+      // Typing and Lab Practice subcollection
+      match /practice/{practiceId} {
+        allow get, list: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId) && isValidId(practiceId) && isValidPractice(incoming());
+        allow update: if false; // Practice sessions are append-only
+        allow delete: if isOwner(userId) || isAdmin();
+      }
+    }
+  }
+}

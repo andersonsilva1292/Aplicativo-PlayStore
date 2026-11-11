@@ -1,0 +1,9 @@
+# Anderson Academy — Simulador de Estudo Interativo
+
+> Plataforma de estudos para a certificação ISTQB CTFL (Certified Tester Foundation Level), com simulados, trilhas por capítulo, chat de IA e relatórios de desempenho.
+
+Anderson Academy ajuda candidatos à certificação a praticar com mais de 1.000 questões, simulados no formato real do exame, trilhas organizadas pelos 6 capítulos do syllabus e análises de progresso.
+
+## Pages
+
+- [Home / Login](/): Página de entrada e cadastro do simulador.
